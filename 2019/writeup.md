@@ -288,11 +288,25 @@ Frage 2: `93089`
 
 Frage 3: NEIN
 
-Frage 3:$tantient(n) = (q-1)(p-1) \Rightarrow$ [Rechner im Netz](https://www.javascripter.net/math/calculators/eulertotientfunction.htm) `836623060`
+Frage 3: $tantient(n) = (q-1)(p-1) \Rightarrow$ [Rechner im Netz](https://www.javascripter.net/math/calculators/eulertotientfunction.htm) `836623060`
 
 Frage 4: Einfach verschlüsseln: $c = m^e mod n$ `256931246631782714357241556582441991993437399854161372646318659020994329843524306570818293602492485385337029697819837182169818816821461486018802894936801257629375428544752970630870631166355711254848465862207765051226282541748174535990314552471546936536330397892907207943448897073772015986097770443616540466471245438117157152783246654401668267323136450122287983612851171545784168132230208726238881861407976917850248110805724300421712827401063963117423718797887144760360749619552577176382615108244813`
 
-Frage 5: 
+Frage 5: NEIN
+
+Frage 6: 	
+
+Zuerst wird phi berechnet: $(p-1)(q-1)$
+
+Es gilt: $e \cdot d=1 mod (p-1)(q-1)$ 
+
+Also: $d= \dfrac{1 mod (p-1)(q-1)}{e}$
+
+$d=1405046269503207469140791548403639533127416416214210694972085079171787580463776820425965898174272870486015739516125786182821637006600742140682552321645503743280670839819078749092730110549881891271317396450158021688253989767145578723458252769465545504142139663476747479225923933192421405464414574786272963741656223941750084051228611576708609346787101088759062724389874160693008783334605903142528824559223515203978707969795087506678894006628296743079886244349469131831225757926844843554897638786146036869572653204735650843186722732736888918789379054050122205253165705085538743651258400390580971043144644984654914856729$
+
+n = 9010912747277787249738727439840427055736519196538871349093408340706668231808840540195374015916168031416186859836416053338250477003776576736854137538279810042409758765948034443613881324504120707334213544491046703922409406729564516371394804946909037646047891880347940067132730874804943893719672960932378043325067514786209219718314429979032869544980643978919561908707109629612202311323626173343456843249212057093980583352634168733656443959925428846968193413110401346035535595817965624054783296380268863401241570313602685481219583686719199499297832165308522137209299081956650614940546284136240753995440003480000000000000
+			
+totient(n) = 90109123920950241136
 
 
 wenn $p^e < N \rightarrow p^e = c$
@@ -345,6 +359,11 @@ Die Datei in der robots.txt aufrufen.
 Lösung: picoCTF{ca1cu1at1ng_Mach1n3s_8e32f}
 
 ## client-side-again
+Can you break into this super secure portal? https://2019shell1.picoctf.com/problem/4163/ (link) or http://2019shell1.picoctf.com:4163
+
+Obfuscation ist eninfach die Verschachtelung des Codes, um ihn unlesbar zu machen. Hier gibt es gute Online-Tools (https://web.archive.org/web/20180701092040/https://illuminatejs.com/#/), um den Code lesbar darzustellen. Hier fallen die Substrings am Anfang aus. Durch ein wenig nachdenken kommt man dann auf die richtige Flag.
+
+Lösung: picoCTF{not_this_again_ea9191}
 
 ## Open-to-admins
 This secure website allows users to access the flag only if they are admin and if the time is exactly 1400. https://2019shell1.picoctf.com/problem/12276/ (link) or http://2019shell1.picoctf.com:12276
@@ -366,6 +385,30 @@ There is a website running at https://2019shell1.picoctf.com/problem/4162/ (link
 Hört sich nach einer SQL Injection an. Also kurz googeln wie das nochmal geht. Als Nutzername gibt man `admin` ein. Als Passwort dann `' or '1'='1' --`.
 
 Lösung: picoCTF{s0m3_SQL_96ab211c}
+
+## Irish-Name-Repo2
+There is a website running at https://2019shell1.picoctf.com/problem/7411/ (link). Someone has bypassed the login before, and now it's being strengthened. Try to see if you can still login! or http://2019shell1.picoctf.com:7411
+
+Ich weiß nicht warum, aber mit `admin' --` als Nutzername bekommt man die Flag. 
+
+Lösung: picoCTF{m0R3_SQL_plz_c1c3dff7}
+
+## Empire1
+Psst, Agent 513, now that you're an employee of Evil Empire Co., try to get their secrets off the company website. https://2019shell1.picoctf.com/problem/45012/ (link) Can you first find the secret code they assigned to you? or http://2019shell1.picoctf.com:45012
+
+Wird ausgegeben, wenn man einen Benutzer erstellt, sich dann die anderen Nutzer anschaut und versucht sich als rayan mit pwd rayan anzumelden.
+
+Habe jetzt die richtige Lösung (SQL Injection):
+Man muss nach dem `secret` suchen, dass seinem `user` zugeordnet ist --> ` ' || (SELECT secret FROM user WHERE username = 'test')  || ' ` Dann wird die flag als ToDo ausgegeben.
+
+Lösung: picoCTF{wh00t_it_a_sql_injecta60643ae}
+
+## Empire2
+Well done, Agent 513! Our sources say Evil Empire Co is passing secrets around when you log in: https://2019shell1.picoctf.com/problem/16415/ (link), can you help us find it? or http://2019shell1.picoctf.com:16415 
+
+Es handelt sich um eine Flast Injection. (https://pequalsnp-team.github.io/cheatsheet/flask-jinja2-ssti). Um die Vunerabilität zu testen kann als ToDo `{{7*'7'}}` eingegeben werden. Wenn 49 als ToDo erscheint ist es Twig wenn 7777777 erscheint Jinja2 (in diesem Fall). Es können weitere Parameter übergeben werden (siehe Link). Mit `{{session}}` bekommt man die Flag.
+
+Lösung: picoCTF{its_a_me_your_flag57060f80}
 
 
 
